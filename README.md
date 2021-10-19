@@ -84,19 +84,81 @@ O formulário para listar os clientes só possui um botão *List*, que quando cl
  2.4. ***table:*** nome da tabela que será utilizada;   
  2.5. ***user:*** nome do usuário do banco de dados. 
 - ### <p name="handler_file"></p>handlerFile(request, response)
+Trata as solicitações de arquivos e chama a função **[`handlerRequest(request, response)`](#handler_request)** para definir as rotas.
 - ### <p name="handler_request"></p>handlerRequest(request, response)
+Função que define as rotas que o servidor irá responder, são elas:
+1. **/insert**
+2. **/read**
+3. **/update**
+4. **/delete**
+5. **/listclients**
 <br><br>
 ## <p name="controller_js"></p>Controller.js
+No arquivo *controller.js* à variável ***controller*** recebe uma instância da classe **ControllerDB**, que será utilizada para manipular as rotas do usuário e as respostas do servidor por meio de seus métodos. há mais três variáveis responsáveis por configurar a url, são elas:
+1. **host**; 
+2. **port**;
+3. **route** (*/insert, /read, /update, /delete, /listclients*).    
+
+E há mais cinco variáveis para armazenar as respostas do servidor, são elas:
+1. **insertResult**
+2. **readResult**
+3. **updateResult**
+4. **deleteResult**
+5. **listResult**
 - ### <p name="insert_client"></p>insertClient()
-Cria um novo cliente no banco de dados, com os dados recebidos do fomulário de inserção. 
+Cria um novo cliente no banco de dados, com os dados recebidos do **[`fomulário de inserção`](#insert_html)**. Há dois métodos chamados na variável ***controller*** dentro desta função, são eles:
+1. **controller.setUrl("http://${host}:${port}/${route}"):** que define a url para a rota */insert*;
+2. **controller.insertClientDB():** método que inseri o cliente no banco de dados e armazena a resposta do servirdor na variável ***insertResult***.
 - ### <p name="read_client"></p>readClient()
+Faz a leitura do cliente no banco de dados com o id passado no **[`fomulário de leitura`](#read_html)**. Há dois métodos chamados na variável ***controller*** dentro desta função, são eles:
+1. **controller.setUrl("http://${host}:${port}/${route}"):** que define a url para a rota */read*;
+2. **controller.readClientDB():** método que faz a leitura do cliente no banco de dados e armazena a resposta do servirdor na variável ***readtResult***.
 - ### <p name="update_client"></p>updateClient()
+Atualiza os dados do cliente no banco de dados referente ao **[`fomulário de atualização`](#update_html)**. Há dois métodos chamados na variável ***controller*** dentro desta função, são eles:
+1. **controller.setUrl("http://${host}:${port}/${route}"):** que define a url para a rota */update*;
+2. **controller.updateClientDB():** método que atualiza os dados do cliente no banco de dados e armazena a resposta do servirdor na variável ***updateResult***.
 - ### <p name="delete_client"></p>deleteClient()
+Deleta os dados do cliente no banco de dados referente ao id passado no **[`fomulário para deletar cliente`](#delete_html)**. Há dois métodos chamados na variável ***controller*** dentro desta função, são eles:
+1. **controller.setUrl("http://${host}:${port}/${route}"):** que define a url para a rota */delete*;
+2. **controller.deleteClientDB():** método que deleta os dados do cliente no banco de dados e armazena a resposta do servirdor na variável ***deleteResult***.
 - ### <p name="list_clients"></p>listClients()
+Lista os dados de todos os clientes no banco de dados referente ao clicar no **[`botão List`](#list_html)**. Há dois métodos chamados na variável ***controller*** dentro desta função, são eles:
+1. **controller.setUrl("http://${host}:${port}/${route}"):** que define a url para a rota */listclients*;
+2. **controller.listClientsDB():** método que lista os dados de todos os clientes no banco de dados e armazena a resposta do servirdor na variável ***listResult***.
 <br><br>
 ## <p name="model_js"></p>Model.js
+Módulo responsável por manipular os dados no banco mySQL.
 - ### <p name="insert_model"></p>insertInDb(connection, table, client)
+Este método faz a inserção do cliente no banco de dados, ele recebe três parâmetros:
+1. **connection:** recebe a conecção mySQL com o banco de dados mySQL;
+2. **tabel:** a tabela onde os dados serão inseridos;
+3. **client:** o bjeto com os dados do cliente que serão inseridos.
+
+Retorna o valor 1 em caso de sucesso, e 0 caso contrário.
 - ### <p name="read_model"></p>readFromDB(connection, table, id)
+Este método faz a leitura de um cliente no banco de dados referente ao id passado, ele recebe três parâmetros:
+1. **connection:** recebe a conecção mySQL com o banco de dados mySQL;
+2. **tabel:** a tabela onde os dados serão inseridos;
+3. **id:** do cliente a ser lido.  
+
+Retorna um objeto com os dados do cliente em caso de sucesso, e um objeto vazio em caso contrário.
 - ### <p name="update_model"></p>updateInDB(connection, table, client)
+Este método faz a atualização do cliente no banco de dados, ele recebe três parâmetros:
+1. **connection:** recebe a conecção mySQL com o banco de dados mySQL;
+2. **tabel:** a tabela onde os dados serão inseridos;
+3. **client:** o bjeto com os dados do cliente que serão atualizados.  
+
+Retorna o valor 1 em caso de sucesso, e 0 caso contrário.
 - ### <p name="delete_model"></p>deleteFromDB(connection, table, id)
+Este método deleta um cliente no banco de dados referente ao id passado, ele recebe três parâmetros:
+1. **connection:** recebe a conecção mySQL com o banco de dados mySQL;
+2. **tabel:** a tabela onde os dados serão inseridos;
+3. **id:** do cliente a ser deletado. 
+
+Retorna o valor 1 em caso de sucesso, e 0 caso contrário.
 - ### <p name="list_model"></p>listFromDB(connection, table)
+Este método lista todos os clientes no banco de dados, ele recebe dois parâmetros:
+1. **connection:** recebe a conecção mySQL com o banco de dados mySQL;
+2. **tabel:** a tabela onde os dados serão inseridos;
+
+Retorna uma lista com todo os clientes em caso de sucesso, e uma lista vazia caso contrário.
