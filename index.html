@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CRUD</h1>
+    <div id="container">
+        <form method="post" id="dados">
+            <label for="name">Inserir cliente</label><br>
+            <input type="text" id="name" name="name" placeholder="Nome do cliente" required><br>
+            <input type="text" id="email" name="email" placeholder="E-mail" required><br>
+            <input type="text" id="address" name="address" placeholder="Endereço"><br>
+            <input type="button" value="Insert" onclick="insertClient()">
+        </form>
+        <br><br>
+        <form method="post" id="read">
+            <label for="read_id">Lê dados de um cliente</label><br>
+            <input id="read_id" type="number" placeholder="Id do cliente" required><br>
+            <input type="button" value="Read" onclick="readClient()">
+        </form>
+        <br><br>
+        <form method="post" id="update">
+            <label for="update_id">Atualizar os dados</label><br>
+            <input type="number" id="update_id" placeholder="Id do cliente"><br>
+            <input type="text" id="update_name" name="name" required placeholder="Nome do cliente"><br>
+            <input type="text" id="update_email" name="email" required placeholder="E-mail"><br>
+            <input type="text" id="update_address" name="address" placeholder="Endereço"><br>
+            <input type="button" value="Update" onclick="updateClient()">
+        </form>
+        <br><br>
+        <form method="post" id="delete">
+            <label for="delete_id">Deletar um cliente</label><br>
+            <input type="number" id="delete_id" placeholder="Id do cliente"><br>
+            <input type="button" value="Delete" onclick="deleteClient()">
+        </form>
+        <br><br>
+        <form method="get" id="list">
+            <label for="list_id">Listar clientes</label><br>
+            <input type="button" value="List" onclick="listClients()">
+        </form>
+    </div>
+    <script src="controller/controller.js"></script>
+</body>
+</html>
